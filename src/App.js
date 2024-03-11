@@ -3,29 +3,57 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
+  
+  const [count, setCount] = useState(0)
   const [GenerateData , SetGenerateData] = useState([])
-  const InputValue = (event) => {
-    console.log(event.target.value)
-    SetGenerateData(event.target.value)
-  };
-  const GenerateParagraph = () => {
 
-    const data = [
-        "This is first Paragraph", 
-        "This is Second Paragraph", 
-        "This is third Paragraph"
-     ]
+  
+  const data = [
+    "This is first Paragraph", 
+    "This is Second Paragraph", 
+    "This is Third Paragraph",
+    "This is Fourth Paragraph", 
+    "This is Fivth Paragraph", 
+    "This is Sixth Paragraph",
+    "This is Seventh Paragraph", 
+    "This is Eigth Paragraph", 
+ ] 
 
-    //  SetGenerateData(data.splice(0, paraValue-1, 0))
-    }
+  const generateParagraph = (e) => {
+    e.preventDefault()
+let amount = parseInt(count);
+
+if(count <= 0){
+  amount= 1
+  alert('Please enter a number start from 1')
+}
+if(count>8){
+amount= 8
+alert('Please enter a number less than 8')
+}
+
+ SetGenerateData(data.splice(0, count))
+}
+ 
 
   return (
     <>
       <div>
-          <input type='text' id='paragraphNumber' onChange={InputValue}
+        <form onSubmit={generateParagraph}>
+          <input type='text' id='paragraphNumber' 
+
+          onChange= {(e) => {
+           setCount(e.target.value)
+          }}
           />
-          <button onClick={GenerateParagraph}>Submit</button>
+          <button>Submit</button>
+
+          <p>{GenerateData.map((item, index) =>{
+            return <p key={index}>{item}</p>
+          })}</p>
+          </form>
         </div>
+
     </>
 
   );
